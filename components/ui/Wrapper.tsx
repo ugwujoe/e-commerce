@@ -15,6 +15,7 @@ export default Wrapper
 const styles = StyleSheet.create({
     container: {
         backgroundColor: colors.white,
-        flex: 1
+        flex: 1,
+        paddingHorizontal: 15,
     }
 });
