@@ -2,11 +2,18 @@ import { View, Text, StyleSheet, TextInput} from 'react-native'
 import React, { useState } from 'react'
 import CustomInput from './CustomInput'
 import CustomButton from '../ui/CustomButton'
+import { validateEmail, validatePassword } from '@/utils'
 
 
 export const LoginForm = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [errorEmail, setErrorEmail] = useState('')
+    const [errorPassword, setErrorPassword] = useState('')
+    const [secure, setSecure] = useState(true)
+
+    const toggleSecure = () => setSecure((prev) => !prev);
+    
 
     const handleEmailChange = (text: string) => {
         setEmail(text)
@@ -16,7 +23,22 @@ export const LoginForm = () => {
 
     }
     const handleSubmit = () => {
-      console.log({email,password});
+      if (!validateEmail(email)) {
+        setErrorEmail('Please enter a valid email address')
+      }
+      if(!validatePassword(password)) {
+        setErrorPassword(
+          'password must include at least one uppercase letter, one lowercase letter, one number, and one special character'
+        );
+        return
+      }
+      console.log({
+        email,password
+      });
+      setEmail('')
+      setPassword('')
+      setErrorEmail('')
+      setErrorPassword('')
     }
     const disabled = email.trim() === '' || password.trim() ==='';
 
@@ -29,6 +51,7 @@ export const LoginForm = () => {
          keyboardType='email-address'
           value={email}
           onChangeText={handleEmailChange}
+          error={errorEmail}
           />
           <CustomInput 
           label='password'
@@ -36,8 +59,15 @@ export const LoginForm = () => {
            keyboardType='default'
             value={password}
             onChangeText={handlePasswordChange}
+            error={errorPassword}
+            secureTextEntry={secure}
+            toggleSecure={toggleSecure}
+            password
             />
-            <CustomButton buttonTitle='Sign in' onPress={handleSubmit} disabled={disabled}/>
+            <CustomButton 
+            buttonTitle='Sign in' 
+            onPress={handleSubmit}
+             disabled={disabled}/>
 
     </View>
   )

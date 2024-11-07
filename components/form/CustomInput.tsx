@@ -1,6 +1,6 @@
-import { View, Text, StyleSheet, KeyboardTypeOptions,TextInput } from 'react-native'
+import { View, Text, StyleSheet, KeyboardTypeOptions,TextInput, TouchableOpacity } from 'react-native'
 import React from 'react'
-
+import { AntDesign, FontAwesome } from '@expo/vector-icons'
 import { colors } from '@/constants'
 
 type Props = {
@@ -10,6 +10,10 @@ type Props = {
  keyboardType?: KeyboardTypeOptions
  label: string
  secureTextEntry?: boolean;
+ error: string;
+ password?:boolean;
+ toggleSecure?: () => void 
+
 
 }
 const CustomInput = ({
@@ -19,6 +23,9 @@ const CustomInput = ({
     keyboardType,
     label,
     secureTextEntry,
+    error,
+    password,
+    toggleSecure
 } : Props) => {
   return (
    <View>
@@ -29,8 +36,21 @@ const CustomInput = ({
       placeholder={placeholder}
       value={value}
       onChangeText={onChangeText}
-      keyboardType={keyboardType}/>
+      keyboardType={keyboardType}
+      secureTextEntry={secureTextEntry}
+      />
+      {password && (
+        <TouchableOpacity onPress={toggleSecure}>
+        {secureTextEntry ? (
+            <AntDesign name='eye' size={30} />
+ ) : (
+    <FontAwesome  name='eye-slash' size={30}/>
+ ) }
+
+      </TouchableOpacity>
+    )}
     </View>
+     {error && <Text style={styles.error}>{error}</Text>}
    </View>
   )
 }
@@ -45,17 +65,25 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         padding: 10,
         height: 55,
-        justifyContent: 'center',
+        flexDirection: 'row',
+        alignItems: 'center'
     },
     input: {
         backgroundColor: 'transparent',
         borderWidth: 0,
-        color: colors.dark
+        color: colors.dark,
+        flex: 1
     },
  label: {
     color: colors.dark,
     fontSize: 15,
     marginBottom: 5,
     fontWeight: 'bold'
+ },
+ error:{
+    color: 'red',
+    fontSize: 15,
+    marginTop: 5,
+    fontWeight: 'bold',
  },
 })
