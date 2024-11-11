@@ -4,52 +4,79 @@ import { Tabs } from "expo-router";
 import { AntDesign } from "@expo/vector-icons";
 import { TabsIcon } from "@/components/TabsIcon";
 import { colors } from "@/constants";
+import { StatusBar } from "react-native";
+import { CartIcon } from "@/components/CartIcon";
 
 const TabsLayout = () => {
   return (
-    <Tabs
+   <>
+   <StatusBar barStyle='light-content'/>
+     <Tabs
       screenOptions={{
         tabBarInactiveTintColor: colors.dark,
         tabBarActiveTintColor: colors.yellow,
+        headerTintColor: colors.yellow,
+        headerStyle: {backgroundColor:colors.dark},
+        headerRight: () => <CartIcon />,
+
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
-          title: "Home",
+          title: "",
+          tabBarLabel: 'Home',
           tabBarIcon: ({ focused, size }) => (
-            <TabsIcon focused={focused} name="home" size={size} />
+            <TabsIcon 
+            focused={focused} 
+            name="home"
+             size={size} />
           ),
         }}
       />
       <Tabs.Screen
         name="menu"
         options={{
-          title: "Menu",
+          title: "",
+          tabBarLabel: 'Menu',
           tabBarIcon: ({ focused, size }) => (
-            <TabsIcon focused={focused} name="bars" size={size} />
+            <TabsIcon
+             focused={focused} 
+             name="bars" 
+             size={size} />
           ),
         }}
       />
       <Tabs.Screen
         name="more"
         options={{
-          title: "More",
+          title: "",
+          tabBarLabel: 'more',
           tabBarIcon: ({ focused, size }) => (
-            <TabsIcon focused={focused} name="amazon" size={size} />
+            <TabsIcon
+             focused={focused} 
+             name="amazon"
+              size={size} />
           ),
         }}
       />
       <Tabs.Screen
         name="account"
         options={{
-          title: "Account",
+          title: "",
+          tabBarLabel: 'Account',
           tabBarIcon: ({ focused, size }) => (
-            <TabsIcon focused={focused} name="user" size={size} />
+            <TabsIcon 
+            focused={focused} 
+            name="user" 
+            size={size} 
+            />
           ),
         }}
       />
     </Tabs>
+   
+   </>
   );
 };
 
