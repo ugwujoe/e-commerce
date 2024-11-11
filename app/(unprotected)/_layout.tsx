@@ -10,12 +10,8 @@ const UnprotectedLayout = () => {
         router.back();
     };
   return <Stack screenOptions={{
-    headerShadowVisible: false
-  }}>
-    <Stack.Screen 
-     name='login'
-     options={{
-        title: 'Amazon.sg',
+    headerShadowVisible: false,
+    title: 'Amazon.sg',
         headerTitleAlign: 'center',
         headerLeft: () => (
             <Pressable onPress={onPress} style={({pressed}) => ({
@@ -26,8 +22,8 @@ const UnprotectedLayout = () => {
 
             </Pressable>
         )
-     }}
-     />
+  }}>
+  
   </Stack>
 }
 
