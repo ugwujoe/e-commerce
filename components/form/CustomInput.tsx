@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, KeyboardTypeOptions,TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, KeyboardTypeOptions,TextInput, TouchableOpacity, StyleProp, ViewStyle } from 'react-native'
 import React from 'react'
 import { AntDesign, FontAwesome } from '@expo/vector-icons'
 import { colors } from '@/constants'
@@ -8,11 +8,12 @@ type Props = {
  value: string
  onChangeText: (text: string) => void
  keyboardType?: KeyboardTypeOptions
- label: string
+ label?: string
  secureTextEntry?: boolean;
- error: string;
+ error?: string;
  password?:boolean;
- toggleSecure?: () => void 
+ toggleSecure?: () => void;
+ style?: StyleProp<ViewStyle> 
 
 
 }
@@ -25,12 +26,13 @@ const CustomInput = ({
     secureTextEntry,
     error,
     password,
-    toggleSecure
+    toggleSecure,
+    style,
 } : Props) => {
   return (
-   <View>
-    <Text style={styles.label}>{label}</Text>
-     <View style={styles.container}>
+   <View style={{flex: 1}}>
+   { label &&<Text style={styles.label}>{label}</Text>}
+     <View style={[styles.container,style]}>
       <TextInput
       style={styles.input}
       placeholder={placeholder}

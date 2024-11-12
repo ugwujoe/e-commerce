@@ -18,6 +18,8 @@ const TabsLayout = () => {
         headerTintColor: colors.yellow,
         headerStyle: {backgroundColor:colors.dark},
         headerRight: () => <CartIcon />,
+        tabBarHideOnKeyboard: true
+      
 
       }}
     >
